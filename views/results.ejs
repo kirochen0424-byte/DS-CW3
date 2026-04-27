@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Report | Digital Archive</title>
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="uk-light">
+    <% 
+       let profile, color, desc, techStatus;
+       if(score >= 7) { 
+           profile = "Digital Guardian"; color = "var(--accent-blue)"; techStatus = "STABLE";
+           desc = "You are a master of your digital afterlife. Your legacy is secure and all data nodes are fully cataloged."; 
+       } else if(score >= 4) { 
+           profile = "Digital Citizen"; color = "#38bdf8"; techStatus = "VULNERABLE";
+           desc = "You're doing okay, but significant sectors of your digital heritage remain unmapped and at risk."; 
+       } else { 
+           profile = "Digital Drifter"; color = "#94a3b8"; techStatus = "CRITICAL";
+           desc = "Warning: Your digital footprints are fading into the static. You lack a coherent legacy protocol."; 
+       }
+    %>
+
+    <div class="uk-container uk-container-small uk-flex uk-flex-middle" style="min-height: 100vh;">
+        <div class="archive-content-card" uk-scrollspy="cls: uk-animation-slide-bottom-small; delay: 300">
+            
+            <div class="uk-flex uk-flex-between uk-margin-medium-bottom">
+                <span class="archive-tag">STATUS // <%= techStatus %></span>
+                <span class="archive-tag">REF_ID: DH-2026-<%= Math.floor(Math.random()*9000) + 1000 %></span>
+            </div>
+
+            <div class="uk-margin-medium-bottom">
+                <h1 class="archive-title" style="margin-bottom: 0 !important;">Assessment Report</h1>
+                <div class="archive-tag" style="opacity: 0.5;">Personal Heritage Vulnerability Scan</div>
+            </div>
+
+            <div class="report-result-box uk-margin-medium-bottom">
+                <div class="archive-tag" style="color: var(--accent-blue); margin-bottom: 5px;">[ PERFORMANCE_METRICS ]</div>
+                <div class="result-score-display">
+                    <span class="score-number"><%= score %></span>
+                    <span class="score-total">/ 8</span>
+                </div>
+                <div class="archive-main-text">
+                    <p style="font-size: 1.3rem; color: #fff; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">
+                        Identity: <span style="color: <%= color %>;"><%= profile %></span>
+                    </p>
+                    <p style="color: var(--text-white); font-family: 'Inter', sans-serif; font-size: 1.05rem; margin: 0; line-height: 1.5;">
+                        <%= desc %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="tips-box" style="max-height: 140px;">
+                <div class="archive-tag" style="font-size: 0.75rem; margin-bottom: 8px;">ADVISORY_NOTES:</div>
+                <ul class="uk-list uk-margin-remove" style="color: rgba(226, 232, 240, 0.7); font-size: 0.9rem; font-family: 'Inter', sans-serif;">
+                    <% if(score >= 7) { %>
+                        <li>• Continue regular audits of your digital vault.</li>
+                        <li>• Maintain advanced encryption for key assets.</li>
+                    <% } else { %>
+                        <li>• Identify a Digital Executor for main accounts.</li>
+                        <li>• Review legacy settings on Google/Meta/iCloud.</li>
+                        <li>• Secure a physical backup of critical keys.</li>
+                    <% } %>
+                </ul>
+            </div>
+
+            <div class="uk-margin-large-top uk-flex uk-flex-middle">
+                <a href="/" class="uk-button uk-button-primary" style="margin-right: 20px;">
+                    > BACK_TO_TERMINAL_
+                </a>
+                <button onclick="window.print()" class="uk-button uk-button-default" style="color: var(--accent-blue); border: 1px solid var(--accent-blue); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 42px; padding: 0 20px; border-radius: 4px;">
+                    [ PRINT_OFFICIAL_PDF ]
+                </button>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

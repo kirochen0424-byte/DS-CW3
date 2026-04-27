@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Legacy Quiz | Archive Diagnostic</title>
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="uk-light">
+    <div class="uk-container uk-container-small uk-flex uk-flex-middle" style="min-height: 100vh; padding: 20px 0;">
+        <form id="quizForm" action="/submit" method="POST" class="uk-width-1-1">
+            <% questions.forEach((q, index) => { %>
+                <div class="quiz-step" id="q-<%= index %>" style="<%= index === 0 ? '' : 'display: none;' %>">
+                    <div class="quiz-system-header uk-margin-bottom uk-flex uk-flex-between">
+                        <span class="archive-tag">DIAGNOSTIC_MODE // ACTIVE</span>
+                        <span class="archive-tag">FILE_RECORD: 0<%= index + 1 %>_OF_10</span>
+                    </div>
+
+                    <div class="quiz-progress-container">
+                        <div class="quiz-progress-bar" style="width: <%= ((index + 1) / questions.length) * 100 %>%"></div>
+                    </div>
+
+                    <div class="archive-content-card">
+                        <span class="archive-tag" style="opacity: 1; color: var(--accent-blue)">QUESTION_NODE_<%= index + 1 %></span>
+                        
+                        <div class="archive-main-text uk-margin-small-top uk-margin-small-bottom">
+                            <h2 class="quiz-question-text" style="color: #fff; margin: 0;"><%= q.q_text %></h2>
+                        </div>
+
+                        <div class="quiz-options-list" id="options-<%= index %>">
+                            <% q.options.forEach((opt, optIdx) => { %>
+                                <label class="answer-label">
+                                    <input class="uk-radio" type="radio" name="q<%= index %>" 
+                                           value="<%= ['a','b','c','d'][optIdx] %>" 
+                                           onclick="handleSelection(<%= index %>, '<%= q.answer %>', this, <%= !!q.is_survey %>)" required>
+                                    <span class="option-prefix">[<%= ['A','B','C','D'][optIdx] %>]</span>
+                                    <span class="option-text"><%= opt %></span>
+                                </label>
+                            <% }) %>
+                        </div>
+
+                        <% if (!q.is_survey) { %>
+                            <div id="tips-<%= index %>" class="tips-box" style="display: none; margin-top: 15px;">
+                                <div class="archive-tag" style="font-size: 0.7rem; margin-bottom: 5px;">SYSTEM_INSIGHT:</div>
+                                <p class="uk-margin-remove" style="color: var(--text-white); font-family: 'Inter', sans-serif;"><%= q.tips %></p>
+                                <% if (q.tips_url) { %>
+                                    <div class="uk-margin-small-top">
+                                        <a href="<%= q.tips_url %>" target="_blank" class="uk-button uk-button-text" style="color: var(--accent-blue); text-transform: lowercase; font-size: 0.8rem;"> > reference_link </a>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% } %>
+
+                        <div class="uk-margin-medium-top">
+                            <button type="button" id="btn-<%= index %>" class="uk-button uk-button-primary" style="display: none;" onclick="showNext(<%= index %>, <%= questions.length %>)">
+                                <%= index === questions.length - 1 ? '> GENERATE_FINAL_REPORT_' : '> PROCEED_TO_NEXT_NODE_' %>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </form>
+    </div>
+
+<script>
+    function handleSelection(index, correctAns, element, isSurvey) {
+        const container = document.getElementById('options-' + index);
+        container.style.pointerEvents = "none";
+        const parent = element.parentElement;
+
+        if (isSurvey) {
+            parent.classList.add('correct-border');
+        } else {
+            const userChoice = element.value.toLowerCase();
+            const correctChoice = correctAns.toLowerCase();
+
+            if (userChoice === correctChoice) {
+                parent.classList.add('correct-border');
+            } else {
+                parent.classList.add('wrong-border');
+                Array.from(container.getElementsByTagName('label')).forEach(label => {
+                    const input = label.querySelector('input');
+                    if (input && input.value.toLowerCase() === correctChoice) {
+                        label.style.borderColor = "var(--accent-blue)";
+                        label.style.borderWidth = "1px";
+                        label.style.borderStyle = "solid";
+                        label.style.opacity = "0.6";
+                    }
+                });
+            }
+            document.getElementById('tips-' + index).style.display = 'block';
+        }
+        document.getElementById('btn-' + index).style.display = 'inline-block';
+    }
+
+    function showNext(currentIndex, total) {
+        if (currentIndex === total - 1) {
+            document.getElementById('quizForm').submit();
+        } else {
+            document.getElementById('q-' + currentIndex).style.display = 'none';
+            document.getElementById('q-' + (currentIndex + 1)).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    }
+</script>
+</body>
+</html>

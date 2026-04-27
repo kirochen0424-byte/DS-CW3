@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Documentation | Digital Archive</title>
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        .archive-main-text p {
+            font-family: 'Inter', sans-serif !important;
+            color: var(--text-white) !important;
+            font-size: 1.05rem !important;
+            line-height: 1.6 !important;
+            margin-bottom: 20px !important;
+            opacity: 0.9;
+        }
+        .archive-tag.section-label {
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-top: 40px;
+            display: block;
+        }
+        .tech-list li {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--accent-blue);
+        }
+        .tech-list li strong { color: #fff; }
+    </style>
+</head>
+<body class="uk-light">
+    <div class="uk-container uk-container-small" style="padding: 60px 0;">
+        
+        <div class="archive-content-card" uk-scrollspy="cls: uk-animation-slide-bottom-small; delay: 300">
+            
+            <div class="uk-flex uk-flex-between uk-margin-medium-bottom">
+                <span class="archive-tag">STATUS // SYSTEM_DOCUMENTATION_V1.0</span>
+                <span class="archive-tag">PROJECT_CODE // AFTERLIFE_SCAN</span>
+            </div>
+
+            <h1 class="archive-title" style="font-size: 2.5rem !important;">Project Documentation</h1>
+            <p class="archive-tag" style="opacity: 0.5;">Design and Build Report for Final Sandbox Project</p>
+
+            <hr class="uk-margin-large-top uk-margin-large-bottom" style="opacity: 0.1;">
+
+            <section>
+                <span class="archive-tag section-label">[ 01 — CONCEPT & ORIGINALITY ]</span>
+                <div class="archive-main-text">
+                    <p>The starting point for this project was a simple question: we leave traces online every single day, but almost nobody seriously thinks about where those traces go after we die.</p>
+                    <p>"The Digital Afterlife" is a knowledge quiz about digital legacy and digital footprint, but it's trying to do more than just test what you know. Eight knowledge-based questions probe how much people actually understand about this space: memorial accounts, platform inheritance policies, and the legal status of digital assets. Most people, it turns out, know very little.</p>
+                    <p>The final two questions shift into survey mode, and get at something harder: if technology could one day reconstruct an "AI version of you" from your social media history and digital footprint, would you want that? Responses are archived in MongoDB Atlas for analysis. The project works on two levels: as a piece of public education, and as early-stage research feeding into my dissertation on Digital Legacy and AI Ethics.</p>
+                </div>
+            </section>
+
+            <section>
+                <span class="archive-tag section-label">[ 02 — TECHNICAL ARCHITECTURE ]</span>
+                <div class="archive-main-text">
+                    <p>The backend runs on Node.js and Express. Questions and survey responses are stored dynamically in MongoDB Atlas, which makes it straightforward to pull data for analysis later.</p>
+                    <ul class="uk-list tech-list">
+                        <li><strong>Backend:</strong> Node.js / Express</li>
+                        <li><strong>Database:</strong> MongoDB Atlas (NoSQL)</li>
+                        <li><strong>Frontend:</strong> EJS Templating / UIkit Framework</li>
+                        <li><strong>Key Features:</strong> CSS Scroll-Snap, Backdrop-blur, Responsive UI</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <span class="archive-tag section-label">[ 03 — CREATIVITY & DESIGN ]</span>
+                <div class="archive-main-text">
+                    <p>The visual concept is a high-security archive terminal. That's not just an aesthetic choice, it's meant to fit the subject matter. Digital legacy has a particular quality to it: data that gets filed away, sealed, and eventually retrieved. Or not.</p>
+                    <p>Typography is a mix of <strong>JetBrains Mono</strong> and <strong>Inter</strong>. Mono handles system labels and data-facing text; it has a cold, mechanical quality that suits the interface. Inter carries the question copy, keeping things readable and human where it matters. The hero title runs a persistent flicker animation modelled on old CRT monitor interference, reflecting the unstable nature of digital memory.</p>
+                </div>
+            </section>
+
+            <section>
+                <span class="archive-tag section-label">[ 04 — IMPACT & INTERPRETATION ]</span>
+                <div class="archive-main-text">
+                    <p>Each knowledge question is followed by a short "Digital Insight", providing the policy or legal context behind it—such as Google's Inactive Account Manager. The goal is to leave users with one concrete question: have I actually thought about what happens to my digital footprint?</p>
+                    <p>The two survey questions at the end are collecting real attitudes toward AI-generated posthumous identity, data that will feed directly into my dissertation research.</p>
+                </div>
+            </section>
+
+            <section class="uk-margin-large-bottom">
+                <span class="archive-tag section-label">[ 05 — ATTRIBUTIONS ]</span>
+                <div class="tips-box" style="font-family: 'JetBrains Mono'; font-size: 0.85rem;">
+                    <p>// Libraries: UIkit, Express, Mongoose, Dotenv</p>
+                    <p>// Typography: JetBrains Mono & Inter via Google Fonts</p>
+                    <p>// Background: Matrix rain effect adapted from Markus Spiske on Unsplash</p>
+                    <p>// Research: Digital estate planning guidelines and academic literature</p>
+                </div>
+            </section>
+
+            <div class="uk-margin-xlarge-top">
+                <a href="/" class="uk-button uk-button-primary">
+                    > RETURN_TO_TERMINAL_ROOT_
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
